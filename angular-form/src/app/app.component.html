@@ -1,16 +1,16 @@
-{{ formName.value | json }}
+{{ friendModel.value | json }}
 
 <form action="" #formName="ngForm">
   <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" ngModel #fname="ngModel"><br>
+  <input type="text" id="fname" name="fname" [(ngModel)]="friendModel._firstName" #fname="ngModel"><br>
   <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" ngModel #lname="ngModel"><br><br>
+  <input type="text" id="lname" name="lname" [(ngModel)]="friendModel._lastName" #lname="ngModel"><br><br>
   <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" ngModel #email="ngModel"><br><br>
+  <input type="email" id="email" name="email" [(ngModel)]="friendModel._email" #email="ngModel"><br><br>
   <label for="phone">Phone :</label><br>
-  <input type="tel" id="phone" name="phone" ngModel #phone="ngModel"><br><br>
+  <input type="tel" id="phone" name="phone" [(ngModel)]="friendModel._phone" #phone="ngModel"><br><br>
   <label for="language">Your favourite languages : </label>
-  <select name="language" id="language" ngModel #language="ngModel">
+  <select name="language" id="language" [(ngModel)]="friendModel._favLang" #language="ngModel">
     <option *ngFor="let language of languages" value="{{ language.name }}">{{ language.name }}</option>
   </select><br><br>
   <input type="submit" value="Submit">
