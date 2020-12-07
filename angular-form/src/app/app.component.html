@@ -1,17 +1,56 @@
-{{ friendModel.value | json }}
+{{ friendModel | json }}
 
-<form action="" #formName="ngForm">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" [(ngModel)]="friendModel._firstName" #fname="ngModel"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" [(ngModel)]="friendModel._lastName" #lname="ngModel"><br><br>
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" [(ngModel)]="friendModel._email" #email="ngModel"><br><br>
-  <label for="phone">Phone :</label><br>
-  <input type="tel" id="phone" name="phone" [(ngModel)]="friendModel._phone" #phone="ngModel"><br><br>
-  <label for="language">Your favourite languages : </label>
-  <select name="language" id="language" [(ngModel)]="friendModel._favLang" #language="ngModel">
-    <option *ngFor="let language of languages" value="{{ language.name }}">{{ language.name }}</option>
-  </select><br><br>
-  <input type="submit" value="Submit">
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <div class="form-group">
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname" class="form-control" pattern="^[A-Z][-a-zA-Z]+$"
+           [(ngModel)]="friendModel.firstName"
+           #fname="ngModel" [ngClass]="{ 'is-invalid': fname.invalid && fname.touched }" required>
+    <div class="invalid-feedback" *ngIf="fname.invalid && fname.touched">
+      <p *ngIf="fname.errors.required">Name is required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname" class="form-control" pattern="^[A-Z][-a-zA-Z]+$"
+           [(ngModel)]="friendModel.lastName"
+           #lname="ngModel" [ngClass]="{ 'is-invalid': lname.invalid && lname.touched  }" required>
+    <div class="invalid-feedback" *ngIf="lname.invalid && lname.touched ">
+      <p *ngIf="lname.errors.required">Last name is required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+           [(ngModel)]="friendModel.email" #email="ngModel"
+           [ngClass]="{ 'is-invalid': email.invalid && email.touched }" email required>
+    <div *ngIf="email.invalid && email.touched" class="invalid-feedback">
+      <div *ngIf="email.errors.required">Email is required</div>
+      <div *ngIf="email.errors.email">Must be a valid email address</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone :</label>
+    <input type="tel" id="phone" name="phone" class="form-control"
+           pattern="^(?:0|\(?\+32\)?\s?|0032\s?)[1-79](?:[\.\-\s]?\d\d){4}$" [(ngModel)]="friendModel.phone"
+           #phone="ngModel"
+           [ngClass]="{ 'is-invalid': phone.invalid && phone.touched  }" required>
+    <div class="invalid-feedback" *ngIf="phone.invalid && phone.touched ">
+      <p *ngIf="phone.errors.required">Phone is required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="language">Your favourite languages : </label>
+    <select name="language" id="language" class="form-control" [(ngModel)]="friendModel.favLang" #language="ngModel"
+            [ngClass]="{ 'is-invalid': language.invalid && language.touched  }" required>
+      <div class="invalid-feedback" *ngIf="language.invalid && language.touched ">
+        <p *ngIf="phone.errors.required">is required</p>
+      </div>
+      <option value="">Select an option</option>
+      <option *ngFor="let language of languages" value="{{ language.name }}">{{ language.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-danger btn-block">Submit</button>
+  </div>
 </form>

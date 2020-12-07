@@ -11,5 +11,11 @@ export class AppComponent {
   title = 'angular-form';
   languages = [{name: 'JavaScript'}, {name: 'PHP'}, {name: 'English'}];
   friendModel = new Friend(null,null,null,null, null)
+
+  // constructor() { }
+
+  onSubmit(form) {
+    console.log(form.value)
+  }
 }
 
