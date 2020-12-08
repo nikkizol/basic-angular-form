@@ -25,5 +25,7 @@ export class AppComponent {
     observable.subscribe(data => console.log("it worked"), error => console.error("it didn't work"))
     console.log(this.friendModel)
   }
+
+
 }
 
