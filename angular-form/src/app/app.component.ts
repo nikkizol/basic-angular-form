@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     const observable = this.addFriendService.addFriend(this.friendModel);
-    observable.subscribe(data => console.log("it worked"), error => console.error("it didn't work"));
+    observable.subscribe(data => this.fetchData('http://localhost:9000/allFriends'), error => console.error("it didn't work"));
     console.log(this.allFriends);
 
   }

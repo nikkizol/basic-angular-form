@@ -1,6 +1,6 @@
 {{ friendModel | json }}
 
-<form novalidate #userForm="ngForm" (ngSubmit)="onSubmit()">
+<form novalidate #userForm="ngForm" method="post" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="fname">First name:</label>
     <input type="text" id="fname" name="fname" class="form-control" pattern="^[A-Z][-a-zA-Z]+$"
@@ -53,4 +53,15 @@
   <div class="form-group">
     <button class="btn btn-danger btn-block" [disabled]="!userForm.valid">Submit</button>
   </div>
-</form>
+</form> <br>
+
+<div class="container" *ngFor="let friend of allFriends">
+  <div>
+    First name: {{friend._firstName}}<br>
+    Last name: {{friend._lastName}}<br>
+    Email: {{friend._email}}<br>
+    Phone number: {{friend._phone}}<br>
+    Favourite language: {{friend._favLang}}<br>
+  </div>
+  <br>
+</div>
