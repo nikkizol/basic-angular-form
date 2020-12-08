@@ -13,7 +13,7 @@ export class ConfigService {
   }
 
   addFriend(friend: Friend) {
-    this.url = "http://localhost:9000/"
+    this.url = "http://localhost:9000/addFriend"
     return this.http.post(this.url, friend)
   }
 }
