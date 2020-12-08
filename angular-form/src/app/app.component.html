@@ -1,6 +1,6 @@
 {{ friendModel | json }}
 
-<form novalidate #userForm="ngForm" (ngSubmit)="onSubmit(friendModel)">
+<form novalidate #userForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="fname">First name:</label>
     <input type="text" id="fname" name="fname" class="form-control" pattern="^[A-Z][-a-zA-Z]+$"

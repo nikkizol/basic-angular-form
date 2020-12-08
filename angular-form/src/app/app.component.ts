@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Friend} from "./friend";
+import {ConfigService} from "./add-friend.service"
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,18 @@ import {Friend} from "./friend";
 export class AppComponent {
   title = 'angular-form';
   languages = [{name: 'JavaScript'}, {name: 'PHP'}, {name: 'English'}];
-  friendModel = new Friend(null, null, null, null, null)
+  friendModel = new Friend(null, null, null, null, null);
 
-  onSubmit(model) {
-    console.log(model)
+  private addFriendService: ConfigService
+
+  constructor(addFriendService: ConfigService) {
+    this.addFriendService = addFriendService;
+  }
+
+  onSubmit() {
+    const observable = this.addFriendService.addFriend(this.friendModel)
+    observable.subscribe(data => console.log("it worked"), error => console.error("it didn't work"))
+    console.log(this.friendModel)
   }
 }
 
